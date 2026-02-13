@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanaphon Development | Modern Tech Solutions</title>
+    
+    <!-- Fonts: 'Poppins' for Headings, 'Sarabun' for Body, 'Inter' for UI -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&family=Sarabun:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Icon Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Palette: Modern Dark Tech Theme */
+            --bg-body: #0a0e14;       /* ดำน้ำเงินเข้มมาก */
+            --bg-card: #151a23;       /* สีพื้นหลังการ์ด */
+            --primary: #3b82f6;       /* ฟ้า Modern Blue */
+            --primary-glow: rgba(59, 130, 246, 0.4);
+            --accent: #10b981;        /* เขียว Tech (สำหรับ Status) */
+            --text-main: #f3f4f6;     /* ขาวเกือบสุด */
+            --text-muted: #9ca3af;    /* เทาอ่อน */
+            --border-color: rgba(255, 255, 255, 0.1);
+            --gradient-hero: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Sarabun', sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at top right, rgba(59, 130, 246, 0.1) 0%, transparent 40%);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, .nav-logo {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-main);
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(10, 14, 20, 0.85); /* Glass Effect */
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-logo img {
+            height: 36px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-link {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            position: relative;
+            background: url('/image/bg_hero.jpg') no-repeat center center/cover;
+        }
+        
+        /* Overlay to darken the bg image for readability */
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, rgba(10, 14, 20, 0.9) 0%, rgba(10, 14, 20, 0.7) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--primary);
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            padding: 14px 32px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            transition: 0.3s;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            background-color: #2563eb;
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+        }
+        
+        .btn-primary i { margin-left: 8px; }
+
+        /* Section Global */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+            text-align: left;
+        }
+
+        .section-subtitle {
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 12px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* About Section */
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            /* grayscale subtly to look premium */
+            filter: grayscale(20%); 
+            transition: 0.3s;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        
+        .about-image:hover img {
+            filter: grayscale(0%);
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tech-item {
+            padding: 8px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            padding: 40px 30px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .service-icon img {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Portfolio - Horizontal Scroll Logic */
+        .portfolio-grid {
+            display: flex;
+            overflow-x: auto;
+            gap: 24px;
+            padding-bottom: 30px; /* Space for scrollbar */
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            
+            /* Custom Scrollbar Styles */
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) var(--bg-card);
+        }
+
+        .portfolio-grid::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .portfolio-grid::-webkit-scrollbar-track {
+            background: var(--bg-card);
+            border-radius: 4px;
+        }
+
+        .portfolio-grid::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        .portfolio-item {
+            flex: 0 0 350px; /* FIXED WIDTH: Ensures consistent look on all devices */
+            scroll-snap-align: start;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            transition: 0.3s;
+            position: relative;
+        }
+
+        /* Adjust width for very small devices */
+        @media (max-width: 480px) {
+            .portfolio-item {
+                flex: 0 0 85vw; /* 85% of viewport width on small phones */
+            }
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-color: var(--primary);
+        }
+
+        .portfolio-img-wrapper {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .portfolio-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-item:hover .portfolio-img-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-content {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 200px;
+        }
+
+        .portfolio-category {
+            font-size: 0.8rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .portfolio-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .portfolio-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .portfolio-link {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: auto;
+        }
+        
+        .portfolio-link:hover {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: #05080c;
+            padding: 60px 0 30px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            font-family: 'Poppins';
+        }
+
+        .footer-copyright {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .about-layout { grid-template-columns: 1fr; }
+            .nav-links { display: none; } /* Simplified for demo */
+            .section-header { text-align: center; }
+            .about-text { text-align: center; }
+            .tech-stack { justify-content: center; }
+        }
+        
+        /* Helpers */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-content">
+            <a href="#" class="nav-logo">
+                <img src="/image/logo_thanaphon.png" alt="Logo" onerror="this.style.display='none';">
+                <span>Thanaphon.Dev</span>
+            </a>
+            <div class="nav-links">
+                <a href="#hero" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#portfolio" class="nav-link">Portfolio</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container hero-content fade-up">
+            <span class="badge">Available for new projects</span>
+            <h1 class="hero-title">Engineering Digital <br>Excellence.</h1>
+            <p class="hero-desc">
+                เราเปลี่ยนความซับซ้อนให้เป็นโซลูชันที่ทรงพลัง เชี่ยวชาญด้านการพัฒนา Web Application และ Desktop Software ระดับองค์กร ด้วยมาตรฐานความปลอดภัยและประสิทธิภาพสูงสุด
+            </p>
+            <a href="#portfolio" class="btn-primary">
+                View Selected Works <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="about-layout">
+                <div class="about-image fade-up">
+                    <img src="/image/profile_avatar.jpg" alt="Thanaphon Developer">
+                </div>
+                <div class="about-text fade-up">
+                    <span class="section-subtitle">Who We Are</span>
+                    <h3>ขับเคลื่อนธุรกิจด้วยเทคโนโลยีที่แม่นยำ</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;">
+                        Thanaphon Development คือทีมพัฒนาซอฟต์แวร์ที่มุ่งเน้นผลลัพธ์ (Result-Oriented) เราไม่ได้แค่เขียนโค้ด แต่เราออกแบบสถาปัตยกรรมระบบที่รองรับการเติบโตในอนาคต (Scalability) ตั้งแต่การวางระบบ Database ที่ซับซ้อน ไปจนถึง User Interface ที่ใช้งานง่าย
+                    </p>
+                    <p style="color: var(--text-muted);">
+                        ด้วยประสบการณ์ในการพัฒนาโซลูชันให้กับหลากหลายอุตสาหกรรม เราพร้อมเป็นพาร์ทเนอร์ทางเทคนิคที่จะช่วยยกระดับธุรกิจของคุณสู่มาตรฐานสากล
+                    </p>
+                    
+                    <div class="tech-stack">
+                        <div class="tech-item"><i class="fas fa-code"></i> C#.NET Core</div>
+                        <div class="tech-item"><i class="fab fa-react"></i> Modern Web</div>
+                        <div class="tech-item"><i class="fas fa-database"></i> SQL Server</div>
+                        <div class="tech-item"><i class="fas fa-cloud"></i> Cloud Integration</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="section-header fade-up">
+                <span class="section-subtitle">Our Expertise</span>
+                <h2 class="section-title">Professional Services</h2>
+            </div>
+
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card fade-up">
+                    <div class="service-icon">
+                        <img src="/icon/icon_web.png" alt="Web">
+                    </div>
+                    <h3>Corporate Website</h3>
+                    <p>สร้างภาพลักษณ์องค์กรที่น่าเชื่อถือด้วยเว็บไซต์ดีไซน์ทันสมัย รองรับ SEO และการแสดงผลบนทุกอุปกรณ์ (Responsive Design) เน้นความรวดเร็วและปลอดภัย</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card fade-up">
+                    <div class="service-icon">
+                        <img src="/icon/icon_app.png" alt="App">
+                    </div>
+                    <h3>Web Application</h3>
+                    <p>พัฒนาระบบเว็บแอปพลิเคชันที่มีความซับซ้อนสูง เช่น ระบบ CRM, ERP หรือ Dashboard สำหรับบริหารจัดการข้อมูลภายในองค์กร (Back-office System)</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card fade-up">
+                    <div class="service-icon">
+                        <img src="/icon/icon_csharp.png" alt="Desktop">
+                    </div>
+                    <h3>Desktop Software (C#)</h3>
+                    <p>พัฒนาซอฟต์แวร์ Windows Application ด้วย .NET Technology สำหรับงานที่ต้องการประสิทธิภาพการประมวลผลสูง หรือการเชื่อมต่อกับ Hardware เฉพาะทาง</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-header fade-up">
+                <span class="section-subtitle">Selected Projects</span>
+                <h2 class="section-title">Featured Works</h2>
+                <p style="color: var(--text-muted); margin-top: 10px;">
+                    <i class="fas fa-arrows-left-right"></i> Scroll to explore more projects
+                </p>
+            </div>
+
+            <div class="portfolio-grid">
+                
+                <!-- Project 1 -->
+                <div class="portfolio-item fade-up">
+                    <div class="portfolio-img-wrapper">
+                        <img src="/image/port_web_general.jpg" alt="Project 1">
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">E-Commerce Solution</div>
+                        <h3 class="portfolio-title">Enterprise Commerce Platform</h3>
+                        <p class="portfolio-desc">แพลตฟอร์มอีคอมเมิร์ซครบวงจร รองรับระบบตะกร้าสินค้า Payment Gateway และระบบจัดการสต็อกสินค้าแบบเรียลไทม์</p>
+                        <a href="#" class="portfolio-link">View Case Study <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="portfolio-item fade-up">
+                    <div class="portfolio-img-wrapper">
+                        <img src="/image/port_web_app.jpg" alt="Project 2">
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">Web Application</div>
+                        <h3 class="portfolio-title">Hospital Management System</h3>
+                        <p class="portfolio-desc">ระบบบริหารจัดการโรงพยาบาล: จัดการข้อมูลผู้ป่วย นัดหมายแพทย์ และระบบออกใบสั่งยา เชื่อมต่อฐานข้อมูลขนาดใหญ่</p>
+                        <a href="#" class="portfolio-link">View Case Study <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="portfolio-item fade-up">
+                    <div class="portfolio-img-wrapper">
+                        <img src="/image/port_desktop_app.jpg" alt="Project 3">
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">Desktop Software</div>
+                        <h3 class="portfolio-title">Smart POS System</h3>
+                        <p class="portfolio-desc">ระบบขายหน้าร้าน (POS) พัฒนาด้วย C#.NET เชื่อมต่อเครื่องพิมพ์ใบเสร็จและลิ้นชักเก็บเงิน รองรับการทำงานแบบ Offline</p>
+                        <a href="#" class="portfolio-link">View Case Study <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 4 (Duplicate for scrolling demo) -->
+                <div class="portfolio-item fade-up">
+                    <div class="portfolio-img-wrapper">
+                        <img src="/image/port_web_general.jpg" alt="Project 4">
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">Real Estate</div>
+                        <h3 class="portfolio-title">Property Listing Web</h3>
+                        <p class="portfolio-desc">เว็บไซต์ค้นหาและประกาศขายอสังหาริมทรัพย์ พร้อมระบบค้นหาแผนที่และนัดหมายชมโครงการ</p>
+                        <a href="#" class="portfolio-link">View Case Study <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Project 5 (Duplicate for scrolling demo) -->
+                <div class="portfolio-item fade-up">
+                    <div class="portfolio-img-wrapper">
+                        <img src="/image/port_web_app.jpg" alt="Project 5">
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">IoT Dashboard</div>
+                        <h3 class="portfolio-title">Factory Monitoring</h3>
+                        <p class="portfolio-desc">ระบบติดตามสถานะเครื่องจักรในโรงงานแบบ Real-time เชื่อมต่อผ่าน MQTT Protocol แสดงผลกราฟ</p>
+                        <a href="#" class="portfolio-link">View Case Study <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Thanaphon.Dev</div>
+                <div class="nav-links" style="gap: 20px;">
+                    <a href="#" style="color: white;"><i class="fab fa-github fa-lg"></i></a>
+                    <a href="#" style="color: white;"><i class="fab fa-linkedin fa-lg"></i></a>
+                    <a href="#" style="color: white;"><i class="fas fa-envelope fa-lg"></i></a>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2024 Thanaphon Development. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for Fade-up Animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Animate once
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-up').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
